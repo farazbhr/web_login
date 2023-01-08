@@ -1,0 +1,40 @@
+version: '3.9'
+ 
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: webLogin_db
+    environment:
+      MYSQL_ROOT_PASSWORD: Frzopr128*bhr
+      MYSQL_DATABASE: webLogin_db
+      MYSQL_USER: db_admin
+      MYSQL_PASSWORD: 2020352
+    ports:
+      - "6033:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      webLogin_net:
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: webLogin_pma
+    links:
+      - mariadb
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - 8081:80
+    networks:
+      webLogin_net:
+
+volumes:
+  dbdata:
+
+networks:
+  webLogin_net:
+    name: webLogin_net
+    external: false
+
