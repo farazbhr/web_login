@@ -5,7 +5,7 @@ $error = "";
 if (array_key_exists("signUp", $_POST)) {
 
     // Database Link
-    include('model/linkDB.php');
+    include('linkDB.php');
 
     //Taking HTML Form Data from User
     $name = mysqli_real_escape_string($linkDB, $_POST['name']);
@@ -117,5 +117,13 @@ if (array_key_exists("logIn", $_POST)) {
             $error2 = "Combination of email/password does not match!";
         }
     }
+}
+
+//PHP code to logout user from website
+
+if (isset($_GET["logout"])) {
+    unset($_SESSION['id']);
+    setcookie("id", "", time() - 3600);
+    $_COOKIE['id'] = "";
 }
 ?>

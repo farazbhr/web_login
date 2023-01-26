@@ -4,6 +4,7 @@ services:
   mariadb:
     image: mariadb:latest
     container_name: webLogin_db
+    restart: on-failure
     environment:
       MYSQL_ROOT_PASSWORD: Frzopr128*bhr
       MYSQL_DATABASE: webLogin_db
@@ -19,6 +20,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: webLogin_pma
+    restart: on-failure
     links:
       - mariadb
     environment:
